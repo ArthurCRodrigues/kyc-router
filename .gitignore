@@ -1,0 +1,66 @@
+# Local datasets and downloaded archives
+/data/
+
+# Virtual environments
+/.venv/
+/venv/
+/env/
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pytype/
+.hypothesis/
+.coverage
+.coverage.*
+htmlcov/
+
+# Packaging and build output
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE and local agent configuration
+/.idea/
+/.vscode/
+/.agents/
+/.codex/
+
+# Environment files and local secrets
+.env
+.env.*
+!.env.example
+
+# Model caches, checkpoints, and training logs
+/.cache/
+/checkpoints/
+/models/
+/outputs/
+/runs/
+/wandb/
+/mlruns/
+/lightning_logs/
+*.ckpt
+*.pth
+*.pt
+*.safetensors
+
+# Temporary and log files
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Operating-system metadata
+.DS_Store
+Thumbs.db
