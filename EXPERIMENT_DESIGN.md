@@ -6,6 +6,11 @@ This document defines version 1 of the experiment for the adaptive KYC router
 research project. It translates the broader roadmap in `PROJECT.md` into rules
 that can be implemented and evaluated consistently.
 
+Phase 2 calibration is complete. Its delivered artifacts and validation are
+recorded in [`docs/phase-2.md`](docs/phase-2.md); the frozen image size and
+degradation values are in
+[`configs/controlled_degradations_v1.json`](configs/controlled_degradations_v1.json).
+
 The contract has three kinds of decisions:
 
 - **Frozen v1 decisions** define what the first experiment means. Changing one
@@ -249,10 +254,9 @@ MIDV photograph
 For the controlled-degradation experiment, the clean template is resized to
 the same canonical dimensions before degradation.
 
-The exact canonical dimensions are a Phase 2 calibration parameter. They will
-preserve the `alb_id` template aspect ratio and be large enough for the smallest
-required text region to remain readable. Once selected, the dimensions must be
-used by both pipelines and frozen before final evaluation.
+The canonical dimensions selected in Phase 2 are frozen in the versioned
+configuration linked above. They preserve the `alb_id` template aspect ratio
+and are used by both pipelines before final evaluation.
 
 ### 6.2 Ground-truth corners
 
@@ -525,7 +529,7 @@ Exposure direction is recorded explicitly as `underexposure` or
 ### 10.5 Parameter calibration
 
 The exact parameters—blur sigma, downsampling scale, JPEG quality, and exposure
-factor—will be selected in Phase 2 using training and validation identities.
+factor—were selected in Phase 2 using training and validation identities.
 The values must satisfy three conditions:
 
 - severity is monotonic by construction;
@@ -533,8 +537,8 @@ The values must satisfy three conditions:
 - the range extends from nearly harmless to clearly damaging.
 
 Parameters must not be chosen from test accuracy. The frozen parameter table
-will be added to this document or a versioned configuration file before the
-test benchmark runs.
+is in the versioned configuration linked above; the calibration and validation
+record is in the Phase 2 delivery document.
 
 ### 10.6 Reproducibility
 
@@ -1002,15 +1006,12 @@ deployment.
 
 ## 20. Remaining calibration work
 
-The research-design decisions are closed. The following values must be measured
-and frozen during their implementation phases:
+The research-design decisions are closed. Phase 2 froze the canonical image
+dimensions and the blur, downsampling, JPEG, and two exposure-direction
+severity ladders in the versioned configuration linked above. Later phases must
+still freeze:
 
-- canonical image width and height;
 - exact OCR and Donut checkpoint identifiers;
-- blur sigma for levels 1–5;
-- downsampling scale for levels 1–5;
-- JPEG quality for levels 1–5;
-- underexposure and overexposure factors for levels 1–5;
 - dark- and bright-pixel thresholds;
 - number of latency warm-ups and repetitions.
 
