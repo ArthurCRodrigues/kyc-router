@@ -2,14 +2,17 @@
 
 ## Current project status
 
-As of 2026-09-15:
+As of 2026-09-16:
 
 - **Phase 0 — Define the Experiment: complete.** The authoritative v1
   decisions are recorded in [`EXPERIMENT_DESIGN.md`](EXPERIMENT_DESIGN.md).
 - **Phase 1 — Explore MIDV-2020: complete for the initial experiment.** The
   executable investigation and its outputs are in
   [`notebooks/01_explore_midv.ipynb`](notebooks/01_explore_midv.ipynb).
-- **Current phase: Phase 2 — Image Processing and Rectification.**
+- **Phase 2 — Image Processing and Rectification: complete.** See the
+  [Phase 2 delivery record](docs/phase-2.md) for the outputs, checks, and
+  known capture limitations.
+- **Next phase: Phase 3 — Build the OCR Pipeline.**
 
 This file remains the broad roadmap. When an older provisional statement here
 differs from the frozen v1 experiment, `EXPERIMENT_DESIGN.md` is authoritative.
@@ -605,6 +608,10 @@ Given a MIDV image, we can:
 
 # Phase 2 — Image Processing and Rectification
 
+**Status: Complete (2026-09-16).** The delivered artifacts and validation are
+summarized in the [Phase 2 delivery record](docs/phase-2.md). The frozen
+calibration values live in the [versioned configuration](configs/controlled_degradations_v1.json).
+
 ## Goal
 
 Learn the computer-vision operations that turn an arbitrary document photograph into a normalized document image.
@@ -664,7 +671,8 @@ For example:
 rectified card -> fixed width × height
 ```
 
-Exact dimensions are not important yet as long as they are consistent.
+The selected dimensions are recorded in the versioned configuration linked
+above and apply to both extraction paths.
 
 ### 4. Crop known fields
 
@@ -720,10 +728,11 @@ crop_field(rectified_image, bbox)
 apply_degradation(image, kind, severity)
 ```
 
-And a notebook:
+The investigations are in:
 
 ```text
 notebooks/02_rectification.ipynb
+notebooks/03_controlled_degradations.ipynb
 ```
 
 showing several before/after examples.
@@ -1745,32 +1754,29 @@ If Donut fine-tuning becomes disproportionately difficult on available hardware,
 We are currently at:
 
 ```text
-Phase 2 — Image Processing and Rectification
+Phase 3 — Build the OCR Pipeline
 ```
 
 The next concrete objective is:
 
-> Use the annotated `alb_id` document corners to rectify one photographed
-> sample into a fixed-size canonical card, map the template field rectangles
-> into that coordinate system, and verify the resulting field crops visually.
+> Run a pretrained printed-text recognizer on the seven crops produced from
+> the frozen canonical RGB input, then measure field accuracy and latency.
 
-Do **not** train anything yet.
+Use the [Phase 2 delivery record](docs/phase-2.md) for the completed input
+preparation and known real-capture limitations. Phase 3's detailed scope and
+evaluation rules are in [`EXPERIMENT_DESIGN.md`](EXPERIMENT_DESIGN.md).
 
 The next milestone is:
 
 ```text
-MIDV photograph + ground-truth corners
-    |
-    v
 canonical rectified card
     |
     v
-verified crops for the seven required fields
+seven field crops
+    |
+    v
+OCR predictions in the canonical seven-field schema
 ```
-
-After rectification and crop geometry are correct, calibrate the four controlled
-degradation families and freeze their parameters as specified in
-[`EXPERIMENT_DESIGN.md`](EXPERIMENT_DESIGN.md).
 
 ---
 
