@@ -1,0 +1,20 @@
+{
+  "purpose": "curiosity side experiment; not the official benchmark or Phase 3 closure",
+  "seed": 2026,
+  "cpu_profiles": {"roomy": "400%", "small": "100%"},
+  "memory_max": "4G",
+  "memory_swap_max": "0",
+  "pytorch_gpu_allocator_cap_gib": 1.0,
+  "torch_threads": 4,
+  "repetitions": 2,
+  "transfer_repetitions": 60,
+  "queue_pending_capacity": 4,
+  "load_duration_seconds": 5,
+  "quiet_arrivals_per_second": 1.5,
+  "surge_arrivals_per_second": 8,
+  "result_cache_capacity": 8,
+  "result_cache_hit_repetitions": 60,
+  "test_policy": "sealed; use the existing 30 validation observations only",
+  "precision": "float32",
+  "official_pipeline_changes": false
+}

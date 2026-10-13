@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=78"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kyc-router"
+version = "0.1.0"
+description = "Small, reproducible identity-document recognition experiments"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+  "numpy>=2.5,<2.6",
+  "pandas>=3.0,<3.1",
+  "torch>=2.14,<2.15",
+  "torchvision>=0.29,<0.30",
+  "transformers>=5.19,<5.20",
+  "pillow>=12.3,<12.4",
+  "sentencepiece>=0.2.2,<0.3",
+  "protobuf>=7.36,<8",
+]
+
+[project.optional-dependencies]
+research = [
+  "opencv-python>=5.0,<5.1",
+  "matplotlib>=3.11,<3.12",
+  "nbformat>=5.11,<6",
+  "nbconvert>=7.17,<8",
+  "ipykernel>=7.3,<8",
+  "psutil>=7.2,<8",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+namespaces = false
