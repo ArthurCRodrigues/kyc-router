@@ -1,0 +1,36 @@
+{
+  "experiment_version": "ocr_finetuning_v1",
+  "seed": 2026,
+  "model_id": "microsoft/trocr-small-printed",
+  "model_revision": "04e994ab854b0089d4929f48c2b4dbe2ce78a340",
+  "baseline_run_id": "20261012T220250890693Z",
+  "training_split": "train",
+  "validation_split": "validation",
+  "test_policy": "sealed; never load test images or select test labels",
+  "sources": ["template", "photo"],
+  "training_targets": "original annotation transcription; preserve case, punctuation, and diacritics; never canonicalize dates for training",
+  "excluded_training_crops": [
+    {"identity_key": "alb_id/61", "source": "photo", "field": "document_number", "reason": "Phase 2 documented glare-erased text"},
+    {"identity_key": "alb_id/63", "source": "photo", "field": "sex", "reason": "Phase 2 documented glare-erased character"}
+  ],
+  "augmentation": "none; isolate supervised adaptation from input-policy changes",
+  "precision": "float32",
+  "micro_batch_size": 1,
+  "gradient_accumulation_steps": 8,
+  "optimizer": "AdamW",
+  "weight_decay": 0.01,
+  "max_grad_norm": 1.0,
+  "warmup_fraction": 0.05,
+  "scheduler": "linear warmup then linear decay per optimizer step",
+  "early_stopping_patience": 2,
+  "training_wall_budget_seconds": 3600,
+  "sanity_check": {"crops": 8, "learning_rate": 0.0001, "maximum_updates": 120, "evaluate_every_updates": 10, "wall_budget_seconds": 300},
+  "stages": [
+    {"name": "decoder", "initialization": "original pretrained checkpoint", "epochs": 5, "encoder_learning_rate": 0.0, "decoder_learning_rate": 0.00001, "gradient_checkpointing": false},
+    {"name": "joint", "initialization": "best decoder-stage checkpoint", "epochs": 5, "encoder_learning_rate": 0.000003, "decoder_learning_rate": 0.000005, "gradient_checkpointing": true}
+  ],
+  "selection": "maximize unweighted mean of template/photo normalized macro Field EM; tie: minimize pooled normalized CER; final tie: earliest candidate",
+  "generation": {"do_sample": false, "num_beams": 1, "max_length": 20, "max_new_tokens": null, "use_cache": false},
+  "latency": {"warmup_documents_per_source": 3, "repetitions_per_observation": 3, "batch_size": 1},
+  "phase3_closure": "not authorized by this experiment; joint review remains required"
+}

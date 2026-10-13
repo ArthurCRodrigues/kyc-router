@@ -1,0 +1,12 @@
+{
+  "purpose": "Follow-up control after the 1-CPU / 4-thread worker showed large throttling",
+  "parent_policy": "configs/ocr_resource_profile_v1.json",
+  "profile": "small_tuned",
+  "cpu_quota": "100%",
+  "torch_threads": 1,
+  "omp_threads": 1,
+  "openblas_threads": 1,
+  "mkl_threads": 1,
+  "all_other_settings": "unchanged from the original profiling policy",
+  "interpretation": "thread-pool policy control, not a new OCR model or official benchmark"
+}

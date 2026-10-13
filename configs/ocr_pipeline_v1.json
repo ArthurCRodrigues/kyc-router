@@ -1,0 +1,85 @@
+{
+  "pipeline_version": "ocr_v1",
+  "status": "frozen at Phase 3 closure",
+  "document_type": "alb_id",
+  "required_fields": [
+    "document_number",
+    "surname",
+    "given_names",
+    "date_of_birth",
+    "expiry_date",
+    "nationality",
+    "sex"
+  ],
+  "canonical_size": [
+    1084,
+    680
+  ],
+  "color": "RGB",
+  "pixel_dtype": "uint8",
+  "precision": "float32",
+  "field_batch_size": 1,
+  "crop": {
+    "padding_x": 0.1,
+    "minimum_padding_x": 12,
+    "padding_top": 0.1,
+    "padding_bottom": 0.4
+  },
+  "generation": {
+    "do_sample": false,
+    "num_beams": 1,
+    "max_length": 20,
+    "max_new_tokens": null,
+    "use_cache": false,
+    "bos_token_id": 0,
+    "decoder_start_token_id": 2,
+    "pad_token_id": 1,
+    "eos_token_id": 2
+  },
+  "decode": {
+    "skip_special_tokens": true,
+    "clean_up_tokenization_spaces": false
+  },
+  "normalization_version": "v1",
+  "validation_version": "alb_id_v1",
+  "source_package_version": "0.1.0",
+  "parent_model_id": "microsoft/trocr-small-printed",
+  "parent_revision": "04e994ab854b0089d4929f48c2b4dbe2ce78a340",
+  "checkpoint_relative_path": "checkpoints/phase3_finetuning/20261012T230738117335Z/joint/best",
+  "checkpoint_files_sha256": {
+    "config.json": "72c18a8a3598cbb0415a07e907f440a9aa69c16e5d7319a1e65c325e879a63a4",
+    "generation_config.json": "2b52bedba4b1f8468007f1e652b51c6d7f08872334852a60d00b9330cbd96946",
+    "model.safetensors": "28adbf956949ebae0fbf93aaf296dbc63a6687d8d4fd4d2cba97a1ff829ed01c",
+    "processor_config.json": "e05d968924f3c49b1bffa0dbd9447e02754999778d47d6784b0bfc37d57da033",
+    "selection_metadata.json": "a7caf50426f7ee6b22a4737a79328edfc62dd829128a98ea07871d3f0b3761e0",
+    "tokenizer.json": "a5f7074835991a61754382f4f4872fb6220c28cdc6120fdca6560dbcb9fe861c",
+    "tokenizer_config.json": "d577c74d0a73f6d6331a0c442a6d0e205fd59fe1faf7c4ee87334f838323809e"
+  },
+  "selection": {
+    "candidate": "joint_epoch_05",
+    "checkpoint": "checkpoints/phase3_finetuning/20261012T230738117335Z/joint/best",
+    "stage": "joint",
+    "epoch": 5,
+    "selection_score": 0.9238095238095239,
+    "pooled_cer": 0.015367727771679473,
+    "nonconstant_field_em": 0.9111111111111111
+  },
+  "training_configuration": "configs/ocr_finetuning_v1.json",
+  "training_configuration_sha256": "724191fb895d8308b5a6a292a7fd307ceab32fb33ec850b3f2fa5be437cb24c1",
+  "split_manifest": "splits/alb_id_v1.csv",
+  "split_manifest_sha256": "8cb6b11e5b8790a5253be9544b72fe255c27890d2b1534599325447fcdecea22",
+  "geometry_configuration": "configs/controlled_degradations_v1.json",
+  "geometry_configuration_sha256": "aafeacc7d603487cee816a6bd641822e3795b340ca56d482456d4217e16cb1b0",
+  "validation_evidence": "outputs/phase3_finetuning/20261012T230738117335Z",
+  "adoption_reason": "Existing mean template/photo macro Field EM objective; 194/210 versus 139/210 pretrained. Accept and disclose five regressions including photo document_number 15/15 to 13/15; no new objective or per-field fallback.",
+  "latency": {
+    "warmup_documents_per_source": 3,
+    "repetitions_per_observation": 3,
+    "field_batch_size": 1,
+    "input": "preloaded canonical RGB; excludes disk/model loading and rectification",
+    "gpu_timing": "synchronize generation and request boundaries"
+  },
+  "test_evaluated": false,
+  "final_pipeline_freeze": true,
+  "profiling_optimizations_adopted": false
+}
