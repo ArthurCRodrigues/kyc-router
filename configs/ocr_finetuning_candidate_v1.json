@@ -1,0 +1,29 @@
+{
+  "status": "selected experiment candidate; Phase 3 still open",
+  "run_id": "20261012T230738117335Z",
+  "parent_model_id": "microsoft/trocr-small-printed",
+  "parent_revision": "04e994ab854b0089d4929f48c2b4dbe2ce78a340",
+  "checkpoint_relative_path": "checkpoints/phase3_finetuning/20261012T230738117335Z/joint/best",
+  "selection": {
+    "candidate": "joint_epoch_05",
+    "checkpoint": "checkpoints/phase3_finetuning/20261012T230738117335Z/joint/best",
+    "stage": "joint",
+    "epoch": 5,
+    "selection_score": 0.9238095238095239,
+    "pooled_cer": 0.015367727771679473,
+    "nonconstant_field_em": 0.9111111111111111
+  },
+  "configuration": "configs/ocr_finetuning_v1.json",
+  "config_sha256": "724191fb895d8308b5a6a292a7fd307ceab32fb33ec850b3f2fa5be437cb24c1",
+  "checkpoint_files_sha256": {
+    "config.json": "72c18a8a3598cbb0415a07e907f440a9aa69c16e5d7319a1e65c325e879a63a4",
+    "generation_config.json": "2b52bedba4b1f8468007f1e652b51c6d7f08872334852a60d00b9330cbd96946",
+    "model.safetensors": "28adbf956949ebae0fbf93aaf296dbc63a6687d8d4fd4d2cba97a1ff829ed01c",
+    "processor_config.json": "e05d968924f3c49b1bffa0dbd9447e02754999778d47d6784b0bfc37d57da033",
+    "selection_metadata.json": "a7caf50426f7ee6b22a4737a79328edfc62dd829128a98ea07871d3f0b3761e0",
+    "tokenizer.json": "a5f7074835991a61754382f4f4872fb6220c28cdc6120fdca6560dbcb9fe861c",
+    "tokenizer_config.json": "d577c74d0a73f6d6331a0c442a6d0e205fd59fe1faf7c4ee87334f838323809e"
+  },
+  "test_evaluated": false,
+  "final_pipeline_freeze": false
+}

@@ -7,7 +7,7 @@ research project. It translates the broader roadmap in `PROJECT.md` into rules
 that can be implemented and evaluated consistently.
 
 Phase 2 calibration is complete. Its delivered artifacts and validation are
-recorded in [`docs/phase-2.md`](docs/phase-2.md); the frozen image size and
+recorded in [`docs/phases/phase-2.md`](docs/phases/phase-2.md); the frozen image size and
 degradation values are in
 [`configs/controlled_degradations_v1.json`](configs/controlled_degradations_v1.json).
 
@@ -1008,12 +1008,17 @@ deployment.
 
 The research-design decisions are closed. Phase 2 froze the canonical image
 dimensions and the blur, downsampling, JPEG, and two exposure-direction
-severity ladders in the versioned configuration linked above. Later phases must
-still freeze:
+severity ladders in the versioned configuration linked above. Phase 3 froze the
+OCR checkpoint, crop/decoding policy, and OCR latency protocol in
+[`configs/ocr_pipeline_v1.json`](configs/ocr_pipeline_v1.json); its
+[delivery record](docs/phases/phase-3.md) documents the decision and verification.
+This records an implementation parameter, not a change to v1 scoring or scope.
+Later phases must still freeze:
 
-- exact OCR and Donut checkpoint identifiers;
+- the exact Donut checkpoint identifier and decoding policy;
 - dark- and bright-pixel thresholds;
-- number of latency warm-ups and repetitions.
+- the Donut/comparison latency warm-up and repetition protocol (with the same
+  recorded conditions for both paths).
 
 These are not open questions about the purpose of the experiment. They are
 calibration parameters whose selection procedure is already defined above.
@@ -1035,5 +1040,5 @@ we can explain, without inventing new rules:
 - what qualifies as routing success;
 - which claims the evidence can and cannot support.
 
-The next implementation work is Phase 2-style image rectification and
-degradation calibration, supported by the completed Phase 1 dataset notebook.
+Historical Phase 0 next step was image rectification and degradation calibration.
+For current phase status and next work, consult [PROJECT.md](PROJECT.md).

@@ -2,7 +2,7 @@
 
 ## Current project status
 
-As of 2026-09-16:
+As of 2026-10-12:
 
 - **Phase 0 — Define the Experiment: complete.** The authoritative v1
   decisions are recorded in [`EXPERIMENT_DESIGN.md`](EXPERIMENT_DESIGN.md).
@@ -10,9 +10,21 @@ As of 2026-09-16:
   executable investigation and its outputs are in
   [`notebooks/01_explore_midv.ipynb`](notebooks/01_explore_midv.ipynb).
 - **Phase 2 — Image Processing and Rectification: complete.** See the
-  [Phase 2 delivery record](docs/phase-2.md) for the outputs, checks, and
+  [Phase 2 delivery record](docs/phases/phase-2.md) for the outputs, checks, and
   known capture limitations.
-- **Next phase: Phase 3 — Build the OCR Pipeline.**
+- **Phase 3 — Build the OCR Pipeline: complete.** The user authorized closure
+  and source extraction. The [delivery record](docs/phases/phase-3.md) records
+  adoption of the fine-tuned checkpoint, validation evidence, regressions,
+  frozen policy, and notebook-to-source verification. The reusable OCR path
+  is in [`src/kyc_router/`](src/kyc_router/); start with the
+  [usage guide](docs/guides/ocr-usage.md) and
+  [architecture](docs/architecture.md).
+  [Pretrained](docs/experiments/ocr-baseline.md),
+  [fine-tuning](docs/experiments/ocr-finetuning.md), and
+  [resource-profiling](docs/experiments/ocr-resource-profile.md) reports retain
+  historical evidence. Profiling variants are not adopted defaults. Test data
+  remain sealed; Phase 4 has not started. Engineering completion does not
+  assert that the learner has completed every understanding check.
 
 This file remains the broad roadmap. When an older provisional statement here
 differs from the frozen v1 experiment, `EXPERIMENT_DESIGN.md` is authoritative.
@@ -609,7 +621,7 @@ Given a MIDV image, we can:
 # Phase 2 — Image Processing and Rectification
 
 **Status: Complete (2026-09-16).** The delivered artifacts and validation are
-summarized in the [Phase 2 delivery record](docs/phase-2.md). The frozen
+summarized in the [Phase 2 delivery record](docs/phases/phase-2.md). The frozen
 calibration values live in the [versioned configuration](configs/controlled_degradations_v1.json).
 
 ## Goal
@@ -777,6 +789,11 @@ For the selected document type:
 ---
 
 # Phase 3 — Build the OCR Pipeline
+
+**Status: Complete (2026-10-12).** The
+[delivery record](docs/phases/phase-3.md) records the adopted model, frozen
+settings, source API, validation parity, and known limitations. The tasks below
+describe the original phase scope, not additional implementation to start.
 
 ## Goal
 
@@ -1641,40 +1658,40 @@ All are valid research findings.
 
 ---
 
-# 8. Suggested Repository Structure
+# 8. Repository Structure
 
-Keep this small initially:
+The current structure separates reusable code from research evidence:
 
 ```text
-adaptive-kyc/
+kyc-router/
 ├── README.md
-├── PROJECT_ROADMAP.md
-├── requirements.txt
+├── PROJECT.md
+├── EXPERIMENT_DESIGN.md
+├── pyproject.toml
+├── requirements/phase3-recorded.txt
 ├── .gitignore
 │
 ├── data/
-│   └── midv2020/
+│   └── raw/                         # local, ignored
 │
 ├── notebooks/
-│   ├── 01_explore_midv.ipynb
-│   └── 02_rectification.ipynb
+│   └── 01 ... 04e                   # executed learning/research
 │
 ├── src/
-│   ├── data/
-│   ├── image/
-│   ├── ocr/
-│   ├── donut/
-│   ├── routing/
-│   └── evaluation/
+│   └── kyc_router/                  # OCR + shared field/metric functions
 │
-├── experiments/
-│
-└── results/
+├── tests/                          # model-free checks
+├── experiments/                    # explicit research runners
+├── configs/                        # versioned policies and frozen model
+├── splits/                         # identity-level assignment
+├── docs/                           # phases, experiments, learning, guides
+├── checkpoints/                    # local, ignored
+└── outputs/                        # local runs, ignored
 ```
 
-Do not create all modules on day one.
-
-Let the structure grow as code becomes reusable.
+Let the structure grow as code becomes reusable. No future-phase packages or
+serving infrastructure are created in advance. See the
+[documentation map](docs/README.md) for where new evidence belongs.
 
 ---
 
@@ -1733,8 +1750,8 @@ This is a guide, not a deadline for each individual implementation.
 | Period | Focus | Status |
 |---|---|---|
 | Weeks 1–2 | Phase 0–1: contract + MIDV exploration | Complete |
-| Weeks 3–5 | Phase 2: image processing and rectification | Current |
-| Weeks 6–9 | Phase 3: OCR pipeline | Not started |
+| Weeks 3–5 | Phase 2: image processing and rectification | Complete |
+| Weeks 6–9 | Phase 3: OCR pipeline | Complete; frozen OCR package and validation parity verified |
 | Weeks 10–14 | Phase 4: OCR-free pipeline | Not started |
 | Weeks 15–17 | Phase 5: degradation benchmark | Not started |
 | Weeks 18–20 | Phase 6: router | Not started |
@@ -1751,32 +1768,27 @@ If Donut fine-tuning becomes disproportionately difficult on available hardware,
 
 # 12. Immediate Next Step
 
-We are currently at:
+The next phase is:
 
 ```text
-Phase 3 — Build the OCR Pipeline
+Ready for Phase 4 — Build the OCR-Free Pipeline (not started)
 ```
 
 The next concrete objective is:
 
-> Run a pretrained printed-text recognizer on the seven crops produced from
-> the frozen canonical RGB input, then measure field accuracy and latency.
+> Plan the OCR-free workshop, then build its comparison path using the same
+> canonical pixels, seven fields, shared normalization, and evaluation rules.
+> This closure does not implement or start Phase 4.
 
-Use the [Phase 2 delivery record](docs/phase-2.md) for the completed input
+Use the [Phase 2 delivery record](docs/phases/phase-2.md) for the completed input
 preparation and known real-capture limitations. Phase 3's detailed scope and
 evaluation rules are in [`EXPERIMENT_DESIGN.md`](EXPERIMENT_DESIGN.md).
 
-The next milestone is:
-
-```text
-canonical rectified card
-    |
-    v
-seven field crops
-    |
-    v
-OCR predictions in the canonical seven-field schema
-```
+The [Phase 3 delivery record](docs/phases/phase-3.md) is the current OCR handoff.
+The [fine-tuning report](docs/experiments/ocr-finetuning.md) retains the measured
+gains and regressions; the [learning guide](docs/learning/ocr-finetuning.md)
+explains its construction. Test evaluation remains deferred to the later frozen
+comparison; no new model selection or source change may be tuned from it.
 
 ---
 
