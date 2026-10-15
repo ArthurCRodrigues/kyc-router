@@ -1,0 +1,19 @@
+# Phase 4 direct environment record; not a portable full transitive lockfile.
+# Python 3.14.7; measured GTX 1650 / CUDA environment.
+numpy==2.5.3
+pandas==3.0.5
+torch==2.14.1+cu130
+torchvision==0.29.1+cu130
+transformers==5.19.0
+pillow==12.3.0
+sentencepiece==0.2.2
+protobuf==7.36.2
+opencv-python==5.0.0.93
+matplotlib==3.11.2
+nbformat==5.11.1
+nbclient==0.11.0
+nbconvert==7.17.1
+ipykernel==7.3.0
+psutil==7.2.2
+huggingface_hub==2.2.0
+setuptools==78.1.0

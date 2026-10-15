@@ -1,0 +1,13 @@
+{
+  "experiment_version": "donut_feasibility_followup_v1",
+  "reason": "Full checkpointed backward OOM and frozen-encoder optimizer initialization OOM at 640x1024 float32",
+  "base_policy": "configs/donut_dataset_v1.json",
+  "mode": "frozen_features",
+  "encoder_weights": "frozen and on CPU during decoder updates",
+  "training_features": "detached deterministic pretrained encoder outputs; no reference text",
+  "decoder": "all decoder parameters trainable, float32",
+  "steps": 2,
+  "batch_size": 1,
+  "optimizer": "AdamW; foreach=False; fused=False",
+  "inference": "full image encoding remains required; training feature cache is not used by inference"
+}

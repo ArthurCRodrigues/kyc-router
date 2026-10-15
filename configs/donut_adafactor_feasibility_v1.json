@@ -1,0 +1,21 @@
+{
+  "experiment_version": "donut_adafactor_feasibility_v1",
+  "reason": "Two AdamW frozen-feature steps passed but the subsequent diagnostic OOMed before its first generation check; require more memory headroom",
+  "mode": "frozen_features_adafactor",
+  "base_policy": "configs/donut_dataset_v1.json",
+  "steps": 10,
+  "optimizer": "transformers.Adafactor",
+  "learning_rate": 0.00005,
+  "scale_parameter": false,
+  "relative_step": false,
+  "warmup_init": false,
+  "beta1": null,
+  "eps": [1e-30, 0.001],
+  "clip_threshold": 1.0,
+  "decay_rate": -0.8,
+  "weight_decay": 0.01,
+  "external_gradient_clipping": false,
+  "decoder_parameters": "all trainable; no embedding freeze",
+  "precision": "float32",
+  "encoder": "frozen, features computed once, weights off GPU during decoder updates"
+}

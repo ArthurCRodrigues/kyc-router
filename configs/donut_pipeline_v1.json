@@ -1,0 +1,128 @@
+{
+  "pipeline_version": "donut_v1",
+  "status": "frozen validation-selected Phase 4 path",
+  "document_type": "alb_id",
+  "required_fields": [
+    "document_number",
+    "surname",
+    "given_names",
+    "date_of_birth",
+    "expiry_date",
+    "nationality",
+    "sex"
+  ],
+  "canonical_size": [
+    1084,
+    680
+  ],
+  "color": "RGB",
+  "pixel_dtype": "uint8",
+  "precision": "float32",
+  "batch_size": 1,
+  "processor": {
+    "backend": "pil",
+    "size": {
+      "height": 640,
+      "width": 1024
+    },
+    "do_align_long_axis": false
+  },
+  "attention_implementation": "eager",
+  "generation": {
+    "do_sample": false,
+    "num_beams": 1,
+    "max_new_tokens": 192,
+    "max_length": null,
+    "use_cache": true,
+    "forced_eos_token_id": null,
+    "decoder_start_token_id": 57525,
+    "bos_token_id": 0,
+    "eos_token_id": 2,
+    "pad_token_id": 1
+  },
+  "decode": {
+    "skip_special_tokens": false,
+    "clean_up_tokenization_spaces": false,
+    "strip_trailing_padding_ids_only": true
+  },
+  "serialization_version": "alb_id_tags_v1",
+  "serialization_policy": {
+    "version": "alb_id_tags_v1",
+    "task_token": "<s_alb_id>",
+    "eos_token": "</s>",
+    "field_order": [
+      "document_number",
+      "surname",
+      "given_names",
+      "date_of_birth",
+      "expiry_date",
+      "nationality",
+      "sex"
+    ],
+    "target_values": "shared_v1_normalized",
+    "escaping": "html.escape(quote=False), canonical amp/lt/gt entities",
+    "duplicate_key_policy": "whole_sequence_structural_failure",
+    "missing_eos_policy": "whole_sequence_structural_failure",
+    "missing_key_policy": "retain_other_parseable_fields",
+    "extra_key_policy": "retain_and_report_schema_violation",
+    "field_order_at_inference": "any_order_without_duplicates"
+  },
+  "schema_token_ids": {
+    "<s_alb_id>": 57525,
+    "<s_document_number>": 57526,
+    "</s_document_number>": 57527,
+    "<s_surname>": 57528,
+    "</s_surname>": 57529,
+    "<s_given_names>": 57530,
+    "</s_given_names>": 57531,
+    "<s_date_of_birth>": 57532,
+    "</s_date_of_birth>": 57533,
+    "<s_expiry_date>": 57534,
+    "</s_expiry_date>": 57535,
+    "<s_nationality>": 57536,
+    "</s_nationality>": 57537,
+    "<s_sex>": 57538,
+    "</s_sex>": 57539
+  },
+  "normalization_version": "v1",
+  "validation_version": "alb_id_v1",
+  "parent_model_id": "naver-clova-ix/donut-base",
+  "parent_revision": "a959cf33c20e09215873e338299c900f57047c61",
+  "checkpoint_relative_path": "checkpoints/phase4_finetuning/20261015T122657718426Z/best",
+  "checkpoint_files_sha256": {
+    "config.json": "efee543f36ac4f79b7fc1f5b74177aec686ea8ed02e861a30bcaa26212aec1ab",
+    "generation_config.json": "a19bd4b2d10cdad5af0e089a09dd5f6d6975969b49b3b48a68dfe2537a175198",
+    "model.safetensors": "e3b4b240750d44c2a716d0caf074e1e9872a29328b2585b86e6e06c9ab950c49",
+    "processor_config.json": "3c3325680ad2e2194a59c3c67eba91278e6d310d14fc4bcd0ed2b4ecb58c8f58",
+    "selection_metadata.json": "ab586fb0161236911cafad57c8df5a8147b92542c005f91ce9d7cb59fd654c10",
+    "tokenizer.json": "d5e508aa6ed7f16e25d1458118cd1a9d6c25ac066762c1ef1b766f2b14926c5b",
+    "tokenizer_config.json": "3f8fffd2c9263e58e059310c58049cf9cc09d41868d4a73de8a9c6cb6112d677"
+  },
+  "selection": {
+    "epoch": 10,
+    "mean_training_loss": 0.020458746370526828,
+    "validation_macro_field_em": 0.9190476190476191,
+    "pooled_cer": 0.009330406147091108,
+    "correct_fields": 193,
+    "schema_failures": 0,
+    "lr_next": 3.0434782608695656e-05,
+    "seconds": 15.72470063000037,
+    "selected_at_this_epoch": true,
+    "checkpoint": "checkpoints/phase4_finetuning/20261015T122657718426Z/best",
+    "encoder_state_sha256": "2a31728db339fa1a16c4cc6d631d852096a35bfc113a951a5753bffe30ab41b4",
+    "trainable_parameters": 127686656,
+    "training_config_sha256": "a3b7c7e2d4a77b0b76191390bc2d65c0d9a7895f97e88e3bcd1cc292edba7917",
+    "dataset_policy_sha256": "fa008ad6b303a1f062ca860a7ddd75a557e60ec8778ada81a31f68a815ab3db4"
+  },
+  "training_evidence": "outputs/phase4_finetuning/20261015T122657718426Z",
+  "training_configuration": "configs/donut_finetuning_v2.json",
+  "training_configuration_sha256": "a3b7c7e2d4a77b0b76191390bc2d65c0d9a7895f97e88e3bcd1cc292edba7917",
+  "dataset_configuration": "configs/donut_dataset_v1.json",
+  "dataset_configuration_sha256": "fa008ad6b303a1f062ca860a7ddd75a557e60ec8778ada81a31f68a815ab3db4",
+  "split_manifest": "splits/alb_id_v1.csv",
+  "split_manifest_sha256": "8cb6b11e5b8790a5253be9544b72fe255c27890d2b1534599325447fcdecea22",
+  "adaptation": "frozen pretrained encoder, all decoder parameters trainable; Adafactor float32",
+  "training_feature_cache_in_inference": false,
+  "latency_protocol": "configs/ocr_donut_comparison_v1.json",
+  "test_evaluated": false
+}

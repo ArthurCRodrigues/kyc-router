@@ -2,7 +2,7 @@
 
 ## Current project status
 
-As of 2026-10-12:
+As of 2026-10-15:
 
 - **Phase 0 — Define the Experiment: complete.** The authoritative v1
   decisions are recorded in [`EXPERIMENT_DESIGN.md`](EXPERIMENT_DESIGN.md).
@@ -23,8 +23,20 @@ As of 2026-10-12:
   [fine-tuning](docs/experiments/ocr-finetuning.md), and
   [resource-profiling](docs/experiments/ocr-resource-profile.md) reports retain
   historical evidence. Profiling variants are not adopted defaults. Test data
-  remain sealed; Phase 4 has not started. Engineering completion does not
+  remain sealed. Engineering completion does not
   assert that the learner has completed every understanding check.
+- **Phase 4 — Build the OCR-Free Pipeline: complete.** The
+  [delivery record](docs/phases/phase-4.md) inventories all executed A–D notebooks,
+  learning material, actual resource/training/comparison evidence, reusable
+  Donut/serialization source, tests, packaging, and artifact verification.
+  [Epoch 10](docs/experiments/donut-finetuning.md) is frozen as `donut_v1`:
+  **193/210 validation fields (91.90%)**, versus OCR's **194/210 (92.38%)**.
+  Donut has lower CER and higher measured latency; name/number errors and the
+  frozen-encoder/Adafactor resource compromise remain explicit. Start with
+  [usage](docs/guides/donut-usage.md) and the
+  [comparison report](docs/experiments/ocr-donut-comparison.md).
+  **Test remains sealed. Phase 5 has not started.** Learner reflections are not
+  marked as passed merely because notebooks executed.
 
 This file remains the broad roadmap. When an older provisional statement here
 differs from the frozen v1 experiment, `EXPERIMENT_DESIGN.md` is authoritative.
@@ -963,6 +975,13 @@ For a rectified MIDV document, the OCR pipeline can return structured identity f
 
 # Phase 4 — Build the OCR-Free Pipeline
 
+**Status: Complete (2026-10-15).** See the
+[delivery record](docs/phases/phase-4.md) for the fulfilled checklist, verified
+source/checkpoint, measured results and limits. The
+[workshop plan](docs/workshops/phase-4.md) and executed A–D notebooks retain the
+learning sequence; the [usage guide](docs/guides/donut-usage.md) documents the API.
+The original scope below remains explanatory, not unfinished work to restart.
+
 ## Goal
 
 Build a second pipeline that solves approximately the same field-extraction problem using an end-to-end document model.
@@ -1056,7 +1075,7 @@ The OCR-free pipeline must be evaluated not just for accuracy but also cost/late
 An interface similar to:
 
 ```python
-prediction = donut_pipeline(rectified_document)
+prediction = donut_pipeline.extract(rectified_document)
 ```
 
 that returns the same field schema as the OCR pipeline.
@@ -1099,7 +1118,9 @@ A CSV file and a few plots are enough.
 
 ## Done when
 
-The OCR-free path can process the same test samples as OCR and produce directly comparable outputs.
+The OCR-free path is frozen, verified on validation, and ready to process the
+same samples as OCR with directly comparable outputs. Test evaluation remains
+deferred to the later frozen comparison under `EXPERIMENT_DESIGN.md`.
 
 ---
 
@@ -1752,7 +1773,7 @@ This is a guide, not a deadline for each individual implementation.
 | Weeks 1–2 | Phase 0–1: contract + MIDV exploration | Complete |
 | Weeks 3–5 | Phase 2: image processing and rectification | Complete |
 | Weeks 6–9 | Phase 3: OCR pipeline | Complete; frozen OCR package and validation parity verified |
-| Weeks 10–14 | Phase 4: OCR-free pipeline | Not started |
+| Weeks 10–14 | Phase 4: OCR-free pipeline | Complete; selected Donut path frozen and source/comparison verified |
 | Weeks 15–17 | Phase 5: degradation benchmark | Not started |
 | Weeks 18–20 | Phase 6: router | Not started |
 | Weeks 21–23 | Phase 7: load/latency experiments | Not started |
@@ -1771,20 +1792,22 @@ If Donut fine-tuning becomes disproportionately difficult on available hardware,
 The next phase is:
 
 ```text
-Ready for Phase 4 — Build the OCR-Free Pipeline (not started)
+Ready for Phase 5 — Build the Benchmark Dataset (not started)
 ```
 
 The next concrete objective is:
 
-> Plan the OCR-free workshop, then build its comparison path using the same
-> canonical pixels, seven fields, shared normalization, and evaluation rules.
-> This closure does not implement or start Phase 4.
+> Plan the controlled benchmark using both frozen extraction paths and Phase 2's
+> existing degradation definitions. Build/audit training and validation records
+> first, then follow the contract's later frozen test evaluation. Calibrate the
+> remaining image-feature thresholds without inspecting test outcomes.
 
 Use the [Phase 2 delivery record](docs/phases/phase-2.md) for the completed input
 preparation and known real-capture limitations. Phase 3's detailed scope and
 evaluation rules are in [`EXPERIMENT_DESIGN.md`](EXPERIMENT_DESIGN.md).
 
-The [Phase 3 delivery record](docs/phases/phase-3.md) is the current OCR handoff.
+The [Phase 3 delivery record](docs/phases/phase-3.md) is the OCR handoff, and the
+[Phase 4 record](docs/phases/phase-4.md) is the current two-path handoff.
 The [fine-tuning report](docs/experiments/ocr-finetuning.md) retains the measured
 gains and regressions; the [learning guide](docs/learning/ocr-finetuning.md)
 explains its construction. Test evaluation remains deferred to the later frozen

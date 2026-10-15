@@ -1012,13 +1012,17 @@ severity ladders in the versioned configuration linked above. Phase 3 froze the
 OCR checkpoint, crop/decoding policy, and OCR latency protocol in
 [`configs/ocr_pipeline_v1.json`](configs/ocr_pipeline_v1.json); its
 [delivery record](docs/phases/phase-3.md) documents the decision and verification.
-This records an implementation parameter, not a change to v1 scoring or scope.
-Later phases must still freeze:
+Phase 4 froze the selected Donut checkpoint, tokenizer/serialization,
+preprocessing, and decoding in
+[`configs/donut_pipeline_v1.json`](configs/donut_pipeline_v1.json), and matched
+warm-up/repetition conditions for both paths in
+[`configs/ocr_donut_comparison_v1.json`](configs/ocr_donut_comparison_v1.json).
+The [Phase 4 record](docs/phases/phase-4.md) links training, verification, and
+comparison evidence. These are implementation/calibration records, not changes
+to v1 scoring, scope, splitting, or the sealed-test policy.
 
-- the exact Donut checkpoint identifier and decoding policy;
-- dark- and bright-pixel thresholds;
-- the Donut/comparison latency warm-up and repetition protocol (with the same
-  recorded conditions for both paths).
+Later benchmark work must still freeze the dark- and bright-pixel thresholds
+using only training/validation observations.
 
 These are not open questions about the purpose of the experiment. They are
 calibration parameters whose selection procedure is already defined above.
