@@ -1,0 +1,37 @@
+{
+  "experiment_version": "donut_dataset_v1",
+  "parent_model_id": "naver-clova-ix/donut-base",
+  "parent_revision": "a959cf33c20e09215873e338299c900f57047c61",
+  "parent_checkpoint": "checkpoints/phase4_foundations/donut-base",
+  "split_manifest": "splits/alb_id_v1.csv",
+  "seed": 2026,
+  "canonical_size": [1084, 680],
+  "processor": {"backend": "pil", "size": {"height": 640, "width": 1024}, "do_align_long_axis": false},
+  "serialization": {
+    "version": "alb_id_tags_v1",
+    "task_token": "<s_alb_id>",
+    "eos_token": "</s>",
+    "field_order": ["document_number", "surname", "given_names", "date_of_birth", "expiry_date", "nationality", "sex"],
+    "target_values": "shared_v1_normalized",
+    "escaping": "html.escape(quote=False), canonical amp/lt/gt entities",
+    "duplicate_key_policy": "whole_sequence_structural_failure",
+    "missing_eos_policy": "whole_sequence_structural_failure",
+    "missing_key_policy": "retain_other_parseable_fields",
+    "extra_key_policy": "retain_and_report_schema_violation",
+    "field_order_at_inference": "any_order_without_duplicates"
+  },
+  "max_target_tokens": 192,
+  "generation": {"do_sample": false, "num_beams": 1, "max_new_tokens": 192, "max_length": null, "use_cache": true, "forced_eos_token_id": null},
+  "feasibility": {
+    "ordered_candidates": ["full_checkpointed", "frozen_encoder"],
+    "batch_size": 1,
+    "optimizer": "AdamW",
+    "learning_rate": 0.00005,
+    "weight_decay": 0.01,
+    "precision": "float32",
+    "steps": 2,
+    "foreach": false,
+    "fused": false
+  },
+  "test_access": "sealed"
+}

@@ -1,0 +1,21 @@
+{
+  "experiment_version": "ocr_donut_comparison_v1",
+  "split": "validation",
+  "observations": "all 15 identities, one template and one rectified photo each",
+  "canonical_input": "same 1084x680 RGB uint8 arrays, already in memory",
+  "batch_size": 1,
+  "precision": "float32 for both frozen pipelines",
+  "seed": 2026,
+  "device": "cuda:0",
+  "torch_threads": 4,
+  "opencv_threads": 1,
+  "model_residency": "one pipeline at a time, full image encoder resident for Donut",
+  "block_order": ["ocr", "donut", "donut", "ocr", "ocr", "donut"],
+  "measured_passes_per_block": 1,
+  "warmup_documents_per_source_per_block": 3,
+  "measured_repetitions_per_observation_per_pipeline": 3,
+  "observation_order": "same seeded permutation for each pipeline's matching repetition index",
+  "timing": "pipeline internal synchronized generation and request boundaries; includes preprocess/decode/parse/normalize/validate; excludes loading, geometry, scoring, writes",
+  "training_feature_cache": "forbidden during measured inference",
+  "test_evaluated": false
+}

@@ -1,0 +1,45 @@
+{
+  "experiment_version": "donut_finetuning_v1",
+  "dataset_policy": "configs/donut_dataset_v1.json",
+  "feasibility_evidence": "outputs/phase4_feasibility/20261015T121708609758Z/result.json",
+  "adaptation": "frozen pretrained encoder; all decoder parameters trainable",
+  "training_features": "deterministic float32 pretrained encoder outputs cached on CPU; encoder off GPU during decoder updates",
+  "precision": "float32",
+  "seed": 2026,
+  "augmentation": "none",
+  "tiny_overfit": {
+    "identity_selection": "first sorted training identity, both views",
+    "learning_rate": 0.0002,
+    "max_optimizer_steps": 200,
+    "evaluate_every_steps": 20,
+    "stop_when": "14/14 required fields correct under free generation",
+    "reset_before_main_training": true
+  },
+  "training": {
+    "optimizer": "AdamW",
+    "learning_rate": 0.00005,
+    "weight_decay": 0.01,
+    "betas": [0.9, 0.999],
+    "epsilon": 1e-8,
+    "foreach": false,
+    "fused": false,
+    "microbatch_size": 1,
+    "gradient_accumulation": 4,
+    "effective_batch_size": 4,
+    "gradient_clip_norm": 1.0,
+    "max_epochs": 24,
+    "learning_rate_schedule": "linear warmup then linear decay",
+    "warmup_optimizer_steps": 35,
+    "validation_every_epochs": 1,
+    "early_stopping_min_epochs": 8,
+    "early_stopping_patience": 6
+  },
+  "selection": {
+    "primary": "mean of template/photo validation macro Field Exact Match",
+    "tie_break_1": "lower pooled corpus CER",
+    "tie_break_2": "earlier epoch"
+  },
+  "generation_policy": "configs/donut_dataset_v1.json:generation; unchanged during selection",
+  "test_evaluated": false,
+  "budget": "one tiny-overfit diagnostic and one main training run; no hyperparameter search"
+}

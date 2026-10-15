@@ -1,0 +1,40 @@
+{
+  "experiment_version": "donut_foundations_v1",
+  "purpose": "Pretrained input/output investigation only; not a training or adopted inference policy",
+  "model_id": "naver-clova-ix/donut-base",
+  "revision": "a959cf33c20e09215873e338299c900f57047c61",
+  "checkpoint_relative_path": "checkpoints/phase4_foundations/donut-base",
+  "download_files": [
+    "config.json",
+    "preprocessor_config.json",
+    "pytorch_model.bin",
+    "added_tokens.json",
+    "sentencepiece.bpe.model",
+    "special_tokens_map.json",
+    "tokenizer.json",
+    "tokenizer_config.json"
+  ],
+  "seed": 2026,
+  "identity_selection": "lexicographically first training identity in splits/alb_id_v1.csv",
+  "sources": ["template", "photo"],
+  "processor_backend": "pil",
+  "exploratory_processor": {
+    "size": {"height": 640, "width": 1024},
+    "do_align_long_axis": false
+  },
+  "precision": "float32",
+  "attention_implementation": "eager",
+  "prompt": "<s_synthdog>",
+  "generation": {
+    "do_sample": false,
+    "num_beams": 1,
+    "max_new_tokens": 48,
+    "max_length": null,
+    "use_cache": true,
+    "forced_eos_token_id": null
+  },
+  "torch_threads": 4,
+  "opencv_threads": 1,
+  "test_evaluated": false,
+  "training_performed": false
+}

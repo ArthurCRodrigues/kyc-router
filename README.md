@@ -12,7 +12,8 @@ Turn identity-card images into structured names, numbers, and dates. Compare two
 extraction paths, then find out when choosing between them is worthwhile.
 
 - **OCR — built:** recognize text in known field crops.
-- **OCR-free — next:** generate structured fields from the whole document.
+- **OCR-free — built:** read the whole card with the
+  [trained Donut path](docs/guides/donut-usage.md), retaining structured failures.
 - **Routing — planned:** choose a path using image quality, then study accuracy
   and latency under load.
 
@@ -26,6 +27,8 @@ extraction paths, then find out when choosing between them is worthwhile.
 | [Evaluation](docs/learning/ocr-evaluation.md) | Exact Match, character errors, and interpreting results. |
 | [Fine-tuning](docs/learning/ocr-finetuning.md) | Training labels, loss, gradients, and checkpoint selection. |
 | [Resource profiling](docs/learning/ocr-resource-profiling.md) | CPU/GPU transfers, caches, memory, and queues. |
+| [OCR-free extraction](docs/learning/ocr-free.md) | Whole-image generation, structured targets, and Phase 4 training concepts. |
+| [Donut training](docs/learning/donut-training.md) | Target grammar, teacher forcing, memory/Adafactor, frozen features, and selection. |
 
 ## Current milestone
 
@@ -35,6 +38,19 @@ The OCR path is complete, with fine-tuned weights, resource experiments, and a
 **Validation field accuracy: 66.19% → 92.38% after fine-tuning.**
 That's 194/210 fields across 15 identities and one MIDV-2020 layout.
 [Results, failures, and tradeoffs →](docs/phases/phase-3.md)
+
+**Phase 4 is complete:** all A–D workshops executed, Donut fine-tuned and frozen,
+and a reusable pipeline verified against the research output.
+
+| Fixed path | Validation correct fields | Macro Field EM |
+|---|---:|---:|
+| OCR | 194/210 | 92.38% |
+| Donut | 193/210 | 91.90% |
+
+Donut has lower character error and higher measured latency. The
+[comparison](docs/experiments/ocr-donut-comparison.md) retains failures, timings,
+resource compromises, and limits. [Phase 4 delivery →](docs/phases/phase-4.md)
+Test remains sealed; the degradation benchmark is next.
 
 ## Explore
 
